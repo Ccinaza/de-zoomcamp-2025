@@ -1,0 +1,22 @@
+# Virtual Environment
+zoom/
+env/
+venv/
+.env/
+
+# Data files
+*.csv
+*.csv.gz
+yellow_tripdata*
+
+# Python
+__pycache__/
+*.py[cod]
+*.class
+
+# IDE
+.idea/
+.vscode/
+
+# System files
+.DS_Store
