@@ -8,6 +8,7 @@ In this homework, we'll prepare the environment and practice Docker and SQL.
 Run docker with the python:3.12.8 image in an interactive mode, use the entrypoint bash.
 What's the version of pip in the image?
 
+**Options**:
 - [ ] 24.3.1
 - [ ] 24.2.1
 - [ ] 23.3.1
@@ -75,7 +76,7 @@ volumes:
     name: vol-pgadmin_data
 ```
 
-- **Possible answers**:
+ **Options**:
   - `postgres:5433`
   - `localhost:5432`
   - `db:5433`
@@ -137,7 +138,7 @@ During the period of October 1st, 2019 (inclusive) and November 1st, 2019 (exclu
 4. Between 7 (exclusive) and 10 miles (inclusive)
 5. Over 10 miles
 
-- **Possible answers**:
+**Options**:
 
 - 104,802; 197,670; 110,612; 27,831; 35,281
 - 104,802; 198,924; 109,603; 27,678; 35,189
@@ -146,7 +147,7 @@ During the period of October 1st, 2019 (inclusive) and November 1st, 2019 (exclu
 - 104,838; 199,013; 109,645; 27,688; 35,202
 
 **Answer**:  
-To answer this question, the SQL command used is:
+To answer this question, the SQL query I used was:
 
 ```sql
 select
@@ -163,21 +164,20 @@ where
 ```
 
 The output was:
+```
 +--------------+----------------------+----------------------+-----------------------+---------------+
 | up_to_1_mile | between_1_to_3_miles | between_3_to_7_miles | between_7_to_10_miles | over_10_miles |
 |--------------+----------------------+----------------------+-----------------------+---------------|
 | 104802       | 198924               | 109603               | 27678                 | 35189         |
 +--------------+----------------------+----------------------+-----------------------+---------------+
-SELECT 1
-Time: 0.408s
-root@localhost:ny_taxi>
+```
 
 ## Question 4: Longest Trip for Each Day
 
 Which was the pick-up day with the longest trip distance? Use the pick-up time for your calculations.
 
 **Answer**:  
-SQL:
+SQL Query:
 
 ```sql
 select 
@@ -197,21 +197,20 @@ limit 1;
 - Without `GROUP BY`, the query would calculate the overall longest trip distance for the entire dataset instead of finding it for each specific day.
 
 The output was:
+```
 +-------------+-------------------+
 | pickup_time | max_trip_distance |
 |-------------+-------------------|
 | 2019-10-31  | 515.89            |
 +-------------+-------------------+
-SELECT 1
-Time: 0.233s
-root@localhost:ny_taxi>
+```
 
 ## Question 5: Three Biggest Pickup Zones
 
 Which were the top pickup locations with over 13,000 in total amount (across all trips) for 2019-10-18?
 Consider only `lpep_pickup_datetime` when filtering by date.
 
-- **Possible answers**:
+ **Options**:
 - East Harlem North, East Harlem South, Morningside Heights
 - East Harlem North, Morningside Heights
 - Morningside Heights, Astoria Park, East Harlem South
@@ -238,6 +237,7 @@ order by
 ```
 
 The output was:
+```
 +---------------------+--------------------+
 | Zone                | total_amount       |
 |---------------------+--------------------|
@@ -245,9 +245,7 @@ The output was:
 | East Harlem South   | 16797.26000000006  |
 | Morningside Heights | 13029.790000000035 |
 +---------------------+--------------------+
-SELECT 3
-Time: 0.325s
-root@localhost:ny_taxi>
+```
 
 ## Question 6: Largest Tip
 
@@ -257,7 +255,7 @@ Note: it's tip , not trip
 
 We need the name of the zone, not the ID.
 
-- **Possible answers**:
+ **Options**:
 - Yorkville West
 - JFK Airport
 - East Harlem North
@@ -270,7 +268,8 @@ SQL:
 select 
     zd."Zone" as dropoff_zone,
 	max(g.tip_amount) AS largest_tip
-from green_taxi g
+from 
+    green_taxi g
 left join 
     zones z on g."PULocationID" = z."LocationID"
 left join 
@@ -285,14 +284,13 @@ limit 1;
 ```
 
 The output was:
+```
 +--------------+-------------+
 | dropoff_zone | largest_tip |
 |--------------+-------------|
 | JFK Airport  | 87.3        |
 +--------------+-------------+
-SELECT 1
-Time: 0.611s
-root@localhost:ny_taxi>
+```
 
 ## Question 7: Terraform Workflow
 
@@ -302,8 +300,7 @@ Which of the following sequences, respectively, describes the workflow for:
 2. Generating proposed changes and auto-executing the plan
 3. Removing all resources managed by Terraform
 
-**Answer**:  
-Options:
+**Options**:
 
 - `terraform import, terraform apply -y, terraform destroy`
 - `terraform init, terraform plan -auto-apply, terraform rm`
@@ -311,7 +308,7 @@ Options:
 - `terraform init, terraform apply -auto-approve, terraform destroy`
 - `terraform import, terraform apply -y, terraform rm`
 
-The correct answer is:
+**The correct answer is:**
 `terraform init, terraform apply -auto-approve, terraform destroy`
 
 Explanation:
