@@ -10,6 +10,7 @@ venv/
 yellow_tripdata*
 *.json
 ny_taxi_postgres_data/
+*.duckdb
 
 
 # Python
