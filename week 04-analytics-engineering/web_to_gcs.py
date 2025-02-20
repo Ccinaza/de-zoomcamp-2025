@@ -14,7 +14,7 @@ Pre-reqs:
 # services = ['fhv','green','yellow']
 init_url = 'https://github.com/DataTalksClub/nyc-tlc-data/releases/download/'
 # switch out the bucketname
-BUCKET = os.environ.get("GCP_GCS_BUCKET", "dtc-data-lake-bucketname")
+BUCKET = os.environ.get("GCP_GCS_BUCKET", "trip_data_2019-2020")
 
 
 def upload_to_gcs(bucket, object_name, local_file):
@@ -23,13 +23,20 @@ def upload_to_gcs(bucket, object_name, local_file):
     """
     # # WORKAROUND to prevent timeout for files > 6 MB on 800 kbps upload speed.
     # # (Ref: https://github.com/googleapis/python-storage/issues/74)
-    # storage.blob._MAX_MULTIPART_SIZE = 5 * 1024 * 1024  # 5 MB
-    # storage.blob._DEFAULT_CHUNKSIZE = 5 * 1024 * 1024  # 5 MB
+    storage.blob._MAX_MULTIPART_SIZE = 5 * 1024 * 1024  # 5 MB
+    storage.blob._DEFAULT_CHUNKSIZE = 5 * 1024 * 1024  # 5 MB
 
-    client = storage.Client()
+    # client = storage.Client()
+    # bucket = client.bucket(bucket)
+    # blob = bucket.blob(object_name)
+    # blob.upload_from_filename(local_file)
+
+    # Add timeout parameters for better stability
+    client = storage.Client(timeout=300)
     bucket = client.bucket(bucket)
     blob = bucket.blob(object_name)
-    blob.upload_from_filename(local_file)
+    blob.chunk_size = 5 * 1024 * 1024  # 5 MB chunks
+    blob.upload_from_filename(local_file, timeout=300)
 
 
 def web_to_gcs(year, service):
@@ -59,7 +66,7 @@ def web_to_gcs(year, service):
         print(f"GCS: {service}/{file_name}")
 
 
-web_to_gcs('2019', 'green')
-web_to_gcs('2020', 'green')
-# web_to_gcs('2019', 'yellow')
-# web_to_gcs('2020', 'yellow')
+# web_to_gcs('2019', 'green')
+# web_to_gcs('2020', 'green')
+web_to_gcs('2019', 'yellow')
+web_to_gcs('2020', 'yellow')
