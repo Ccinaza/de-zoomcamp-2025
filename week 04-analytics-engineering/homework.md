@@ -128,7 +128,7 @@ That all being said, regarding macro above,
 - When using `stg`, it materializes in the dataset defined in `DBT_BIGQUERY_STAGING_DATASET`, or defaults to `DBT_BIGQUERY_TARGET_DATASET`
 - When using `staging`, it materializes in the dataset defined in `DBT_BIGQUERY_STAGING_DATASET`, or defaults to `DBT_BIGQUERY_TARGET_DATASET`
 
-Answer: **ALL except Setting a value for `DBT_BIGQUERY_STAGING_DATASET**
+Answer: **All of teh above except 'Setting a value for DBT_BIGQUERY_STAGING_DATASET env var is mandatory, or it'll fail to compile'**
 
 
 ### Question 5: Taxi Quarterly Revenue Growth
@@ -167,8 +167,6 @@ Now, what are the values of `p97`, `p95`, `p90` for Green Taxi and Yellow Taxi, 
 - green: {p97: 55.0, p95: 45.0, p90: 26.5}, yellow: {p97: 52.0, p95: 25.5, p90: 19.0}
 
 Answer: **green: {p97: 55.0, p95: 45.0, p90: 26.5}, yellow: {p97: 31.5, p95: 25.5, p90: 19.0}**
-
-![Q6](img_q6.png)
 
 
 ### Question 7: Top #Nth longest P90 travel time Location for FHV
