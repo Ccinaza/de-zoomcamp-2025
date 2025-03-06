@@ -5,7 +5,7 @@ venv/
 .env/
 
 # Data files
-*.csv
+green_tripdata*
 *.csv.gz
 yellow_tripdata*
 *.json
