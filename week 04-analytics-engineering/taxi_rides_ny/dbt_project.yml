@@ -38,6 +38,12 @@ clean-targets:         # directories to be removed by `dbt clean`
 models:
   taxi_rides_ny:
 
+# Seeds configuration
+seeds:
+  taxi_rides_ny:
+    taxi_zone_lookup:
+      +enabled: true
+
 
 vars:
   payment_type_values: [1, 2, 3, 4, 5, 6]
